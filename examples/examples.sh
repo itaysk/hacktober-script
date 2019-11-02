@@ -1,5 +1,5 @@
 # filter our specific authors
-jq '[.[] | select(.author != "itaysk" and .author != "someuser")]' ./res.json > filtered.json
+jq '[.[] | select(.author != "itaysk" and .author != "someuser")]' ./agg.json > filtered.json
 
 # export list to csv
 jq -r '.[] | [.author, .prs] | @csv' filtered.json > list.csv

@@ -15,7 +15,7 @@ echo '--workdir : if specified, will skip downloading from GitHub API, and will 
 echo 'example: hacktober-script.sh --repo aquasecurity/kube-hunter --repo aquasecurity/trivy --since "2019-10-01T00:00:00Z" --before "2019-10-31T00:00:00Z" --minpr 3'
 echo 'example: hacktober-script.sh --org aquasecurity --since "2019-10-01T00:00:00Z" --before "2019-10-31T00:00:00Z" --minpr 3 --noclean --token a1b2c3'
 echo 'example: hacktober-script.sh --workdir "/path/to/dir" --since "2019-10-01T00:00:00Z" --before "2019-10-31T00:00:00Z" --minpr 3 --noclean'
-echo 'requirements: bash 4+, jq, gnu find (gfind on mac), gnu sed (gnu find on mac), curl'
+echo 'requirements: bash 4+, jq, gnu find (gfind on mac), gnu sed (gnu find on mac), curl, tee'
 }
 
 while [[ $# -gt 0 ]]; do
@@ -128,11 +128,11 @@ jq --slurp --arg since "$since" --arg before "$before" --argjson minpr "$minpr" 
         {"author":.user.login, "created": .created_at}
     ] |
     group_by(.author) |
-    map(select(. | length > $minpr))' \
-    $("$find" $workdir/data -type f -printf "%p ")> "$workdir/res"
+    map(select(. | length >= $minpr))' \
+    $("$find" $workdir/data -type f -printf "%p ")> "$workdir/res.json"
 
 ## output aggregated results
-jq '. | map({"author":.[0].author, "prs":. | length})' "$workdir/res"
+jq '. | map({"author":.[0].author, "prs":. | length})' "$workdir/res.json" | tee "$workdir/agg.json"
 
 ## cleanup
 if [[ ! $noclean ]]; then
