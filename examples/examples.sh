@@ -1,6 +1,9 @@
 # filter our specific authors
 jq '[.[] | select(.author != "itaysk" and .author != "someuser")]' ./res.json > filtered.json
 
+# export list to csv
+jq -r '.[] | [.author, .prs] | @csv' filtered.json > list.csv
+
 # count total prs across all authors
 jq 'reduce .[].prs as $authprs (0; . + $authprs)' filtered.json 
 
