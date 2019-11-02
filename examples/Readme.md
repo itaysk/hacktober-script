@@ -1,0 +1,1 @@
+This folder containes examples for how you can further investigate the atrifacts created by running the script with the `--noclean` option.
