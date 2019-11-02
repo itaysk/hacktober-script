@@ -135,4 +135,9 @@ jq --slurp --arg since "$since" --arg before "$before" --argjson minpr "$minpr" 
 jq '. | map({"author":.[0].author, "prs":. | length})' "$workdir/res"
 
 ## cleanup
-[[ ! $noclean ]] && rm -rf "$workdir"
+if [[ ! $noclean ]]; then
+    echo "removing workdir $workdir"
+    rm -rf "$workdir"
+else
+    echo "data is kept in workdir $workdir"
+fi
