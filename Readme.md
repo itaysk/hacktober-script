@@ -25,4 +25,4 @@ hacktober-script.sh --workdir "/path/to/dir" --since "2019-10-01T00:00:00Z" --be
 The [examples](./examples) directory contains more on how to further investigate the artifacts created by running the script with the `--noclean` option.
 
 ## Requirements
-bash 4+, jq, gnu find (gfind on mac), gnu sed (gnu find on mac), curl
+bash 4+, jq, gnu find (gfind on mac), gnu sed (gnu find on mac), curl, tee
