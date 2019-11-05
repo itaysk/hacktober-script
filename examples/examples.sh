@@ -8,7 +8,7 @@ jq -r '.[] | [.author, .prs] | @csv' filtered.json > list.csv
 jq 'reduce .[].prs as $authprs (0; . + $authprs)' filtered.json 
 
 # count authors with at least 3 prs
-jq '.[] | select(.prs >= 3)] | length' filtered.json
+jq '[.[] | select(.prs >= 3)] | length' filtered.json
 
 # count prs from authors with at least 3 prs
 jq '[.[] |  select(.prs >= 3)] | reduce .[].prs as $authprs (0; . + $authprs)' filtered.json
