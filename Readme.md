@@ -17,9 +17,9 @@ flag | description
 ```bash
 hacktober-script.sh --repo aquasecurity/kube-hunter --repo aquasecurity/trivy --since "2019-10-01T00:00:00Z" --before "2019-10-31T00:00:00Z" --minpr 3
 
-hacktober-script.sh --org aquasecurity --since "2019-10-01T00:00:00Z" --before "2019-10-31T00:00:00Z" --minpr 3 --noclean --token a1b2c3
+hacktober-script.sh --org aquasecurity --since "2019-10-01T00:00:00Z" --before "2019-10-31T23:59:59Z" --minpr 3 --noclean --token a1b2c3
 
-hacktober-script.sh --workdir "/path/to/dir" --since "2019-10-01T00:00:00Z" --before "2019-10-31T00:00:00Z" --minpr 3 --noclean
+hacktober-script.sh --workdir "/path/to/dir" --since "2019-10-01T00:00:00Z" --before "2019-10-31T23:59:59Z" --minpr 3 --noclean
 ```
 
 The [examples](./examples) directory contains more on how to further investigate the artifacts created by running the script with the `--noclean` option.
