@@ -1,4 +1,4 @@
-# filter our specific authors
+# filter out specific authors
 jq '[.[] | select(.author != "itaysk" and .author != "someuser")]' ./agg.json > filtered.json
 
 # export list to csv
@@ -12,3 +12,6 @@ jq '[.[] | select(.prs >= 3)] | length' filtered.json
 
 # count prs from authors with at least 3 prs
 jq '[.[] |  select(.prs >= 3)] | reduce .[].prs as $authprs (0; . + $authprs)' filtered.json
+
+# delete empty files
+find ./data -type f  -size 5c -delete
