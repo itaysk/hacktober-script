@@ -131,7 +131,7 @@ jq --slurp --arg since "$since" --arg before "$before" --argjson minpr "$minpr" 
         select(.created_at >= $since and .created_at <= $before) |
         select(. | has("pull_request")) |
         select((.labels | length == 0) or (.labels | .[].name != "invalid")) |
-        {"author":.user.login, "created": .created_at}
+        {"author":.user.login, "created": .created_at, link: .html_url}
     ] |
     group_by(.author) |
     map(select(. | length >= $minpr))' \
